@@ -37,27 +37,36 @@
     }, 6000);
   }
 
-  /* No backend yet — validate natively, then show an inline success state. */
-  function initConsultForm() {
-    var form = $("#consult-form");
-    var success = $("#form-success");
-    if (!form || !success) return;
+  /* Animated count-up for the "150+" social-proof stat, once it enters view. */
+  function initCountUp() {
+    var el = $("[data-count-to]");
+    if (!el) return;
+    var target = parseInt(el.getAttribute("data-count-to"), 10) || 0;
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!form.reportValidity()) return;
+    function run() {
+      var start = null;
+      var duration = 1200;
+      function tick(ts) {
+        if (start === null) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        el.textContent = Math.round(progress * target);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
 
-      // TODO: aquí se conecta el envío real (WhatsApp API / CRM) cuando esté definido.
-      $$("input", form).forEach(function (input) { input.disabled = true; });
-      var btn = $("button[type=submit]", form);
-      if (btn) btn.disabled = true;
-      success.hidden = false;
-    });
+    if (!("IntersectionObserver" in window)) { el.textContent = target; return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { run(); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.3 });
+    io.observe(el);
   }
 
   function boot() {
     safe(initReveals, "initReveals");
-    safe(initConsultForm, "initConsultForm");
+    safe(initCountUp, "initCountUp");
     document.documentElement.classList.add("is-ready");
   }
 

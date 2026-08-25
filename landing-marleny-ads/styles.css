@@ -12,6 +12,11 @@
   --accent-2:  #7d5a4a;
   --line:      rgba(26, 26, 26, 0.12);
 
+  /* Pastel tomado del perfil de Instagram @eventplannerbymarleny */
+  --pastel:      #ecd0cb;
+  --pastel-soft: #f4e3df;
+  --pastel-ink:  #7a4f47;
+
   --serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
   --sans:  "Inter", -apple-system, "Segoe UI", sans-serif;
 
@@ -96,6 +101,21 @@ em { font-style: italic; color: var(--accent); }
 }
 .reveal.is-visible {
   opacity: 1;
+  transform: none;
+}
+/* Stagger — small groups of cards/photos reveal one after another */
+.reveal[data-index="0"] { transition-delay: 0s; }
+.reveal[data-index="1"] { transition-delay: .12s; }
+.reveal[data-index="2"] { transition-delay: .24s; }
+
+.includes__card.reveal,
+.photo-placeholder--gallery.reveal,
+.testimonial.reveal {
+  transform: translateY(24px) scale(.96);
+}
+.includes__card.reveal.is-visible,
+.photo-placeholder--gallery.reveal.is-visible,
+.testimonial.reveal.is-visible {
   transform: none;
 }
 
@@ -200,26 +220,70 @@ section { scroll-margin-top: var(--header-h); }
 }
 
 /* ---- Hero ---- */
-.hero { padding-block: 2.5rem 3rem; }
-.hero__grid {
+.hero {
+  position: relative;
+  overflow: clip;
+  padding-block: 3rem 3.5rem;
+  background: radial-gradient(120% 90% at 50% 0%, var(--pastel-soft) 0%, var(--bg) 62%);
+}
+.hero__center {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  text-align: center;
 }
 .hero__title {
   font-size: clamp(2.1rem, 7vw, 3.6rem);
-  margin-bottom: 1.25rem;
+  max-width: 18ch;
+  margin-bottom: 1.1rem;
 }
 .hero__subtitle {
   font-size: 1.05rem;
   color: var(--ink-soft);
   max-width: 42ch;
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 }
-.hero__media .photo-placeholder--hero {
-  aspect-ratio: 4 / 5;
+
+/* Ambient decorative blobs — slow loop, not gated (see gotcha A.2: fades/mesh loops are functional, not intrusive) */
+.hero__blob {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: .55;
+  background: var(--pastel);
+  animation: heroBlobFloat 16s ease-in-out infinite;
+}
+.hero__blob--a { width: 340px; height: 340px; top: -140px; left: -80px; }
+.hero__blob--b {
+  width: 300px; height: 300px; top: 40%; right: -100px;
+  background: var(--pastel-soft);
+  animation-duration: 20s;
+  animation-delay: -6s;
+}
+@keyframes heroBlobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4%, 6%) scale(1.08); }
+}
+
+/* ---- Hero booking (Calendly) ---- */
+.hero__booking {
   width: 100%;
+  max-width: 700px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: .5rem;
+  box-shadow: 0 20px 48px rgba(26, 26, 26, 0.08);
 }
+.hero__booking .calendly-inline-widget {
+  width: 100%;
+  min-width: 280px;
+  height: 560px;
+}
+.hero__booking .btn { margin: 1rem; width: calc(100% - 2rem); }
 
 /* ---- Pain ---- */
 .pain {
@@ -290,12 +354,18 @@ section { scroll-margin-top: var(--header-h); }
   padding: 1.75rem;
 }
 .includes__index {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--pastel);
+  color: var(--pastel-ink);
   font-family: var(--serif);
   font-style: italic;
-  color: var(--accent);
-  font-size: 1.1rem;
-  margin-bottom: .75rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 .includes__card p { color: var(--ink-soft); }
 
@@ -342,7 +412,9 @@ section { scroll-margin-top: var(--header-h); }
 .cta-final__inner {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
 }
 .cta-final__copy h2 {
   font-size: clamp(1.7rem, 4.4vw, 2.3rem);
@@ -351,38 +423,7 @@ section { scroll-margin-top: var(--header-h); }
 .cta-final__copy p {
   color: var(--ink-soft);
   max-width: 40ch;
-}
-.cta-form {
-  background: var(--paper);
-  border-radius: var(--radius);
-  padding: 1.75rem;
-  border: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  max-width: 480px;
-}
-.field { display: flex; flex-direction: column; gap: .4rem; }
-.field label {
-  font-size: .8rem;
-  letter-spacing: .04em;
-  color: var(--ink-mute);
-}
-.field input {
-  font: inherit;
-  padding: .75rem .9rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--bg);
-  color: var(--ink);
-}
-.field input:focus-visible { outline-offset: 1px; }
-.cta-form__success {
-  font-size: .9rem;
-  color: var(--accent-2);
-  background: var(--bg-2);
-  border-radius: 10px;
-  padding: .75rem .9rem;
+  margin-inline: auto;
 }
 
 /* =============================================================
@@ -448,24 +489,12 @@ section { scroll-margin-top: var(--header-h); }
 @media (min-width: 540px) {
   .proof__gallery { grid-template-columns: repeat(3, 1fr); }
   .includes__grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (min-width: 720px) {
-  .cta-final__inner { flex-direction: row; align-items: flex-start; justify-content: space-between; }
-  .cta-final__copy { flex: 0 0 40%; }
-  .cta-form { flex: 0 0 50%; }
+  .hero__booking .calendly-inline-widget { height: 620px; }
 }
 
 @media (min-width: 960px) {
   :root { --header-h: 88px; }
-  .hero__grid {
-    flex-direction: row;
-    align-items: center;
-    gap: 3.5rem;
-  }
-  .hero__copy { flex: 0 0 46%; }
-  .hero__media { flex: 1; }
-  .hero__title { text-align: left; }
+  .hero__booking .calendly-inline-widget { height: 680px; }
   .testimonial { flex-direction: row; align-items: center; }
   .testimonial--reverse { flex-direction: row-reverse; }
   .testimonial .photo-placeholder--testimonial { flex: 0 0 42%; }
