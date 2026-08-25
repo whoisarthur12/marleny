@@ -268,22 +268,16 @@ section { scroll-margin-top: var(--header-h); }
   50% { transform: translate(4%, 6%) scale(1.08); }
 }
 
-/* ---- Hero booking (Calendly) ---- */
-.hero__booking {
+/* ---- Hero video ---- */
+.hero__video {
   width: 100%;
-  max-width: 700px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: .5rem;
-  box-shadow: 0 20px 48px rgba(26, 26, 26, 0.08);
+  max-width: 900px;
+  margin-top: 2rem;
 }
-.hero__booking .calendly-inline-widget {
+.photo-placeholder--hero-video {
+  aspect-ratio: 16 / 9;
   width: 100%;
-  min-width: 280px;
-  height: 560px;
 }
-.hero__booking .btn { margin: 1rem; width: calc(100% - 2rem); }
 
 /* ---- Pain ---- */
 .pain {
@@ -425,6 +419,21 @@ section { scroll-margin-top: var(--header-h); }
   max-width: 40ch;
   margin-inline: auto;
 }
+.booking-widget {
+  width: 100%;
+  max-width: 700px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: .5rem;
+  box-shadow: 0 20px 48px rgba(26, 26, 26, 0.08);
+}
+.booking-widget .calendly-inline-widget {
+  width: 100%;
+  min-width: 280px;
+  height: 560px;
+}
+.booking-widget .btn { margin: 1rem; width: calc(100% - 2rem); }
 
 /* =============================================================
    7. Footer
@@ -489,12 +498,12 @@ section { scroll-margin-top: var(--header-h); }
 @media (min-width: 540px) {
   .proof__gallery { grid-template-columns: repeat(3, 1fr); }
   .includes__grid { grid-template-columns: repeat(3, 1fr); }
-  .hero__booking .calendly-inline-widget { height: 620px; }
+  .booking-widget .calendly-inline-widget { height: 620px; }
 }
 
 @media (min-width: 960px) {
   :root { --header-h: 88px; }
-  .hero__booking .calendly-inline-widget { height: 700px; }
+  .booking-widget .calendly-inline-widget { height: 700px; }
   .testimonial { flex-direction: row; align-items: center; }
   .testimonial--reverse { flex-direction: row-reverse; }
   .testimonial .photo-placeholder--testimonial { flex: 0 0 42%; }

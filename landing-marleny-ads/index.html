@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500&display=swap">
 
-<link rel="stylesheet" href="styles.css?v=20260825c">
+<link rel="stylesheet" href="styles.css?v=20260825d">
 
 <!-- Calendly: widget en vivo, no se puede auto-hospedar — excepción intencional a "sin CDN en runtime" -->
 <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
@@ -50,16 +50,13 @@
         Agenda tu llamada gratuita de 30 minutos y sal con presupuesto,
         proveedores y un plan claro de próximos pasos.
       </p>
+      <a class="btn btn--primary btn--large reveal" href="#cta-form">Agenda tu asesoría gratuita</a>
 
-      <div class="hero__booking reveal" id="cta-form">
-        <div class="calendly-inline-widget"
-             data-url="https://calendly.com/webmarlenyluna/30min">
+      <div class="hero__video reveal">
+        <!-- TODO: reemplazar con video real (formato horizontal, 16:9) -->
+        <div class="photo-placeholder photo-placeholder--hero-video" role="img" aria-label="Video pendiente">
+          <span>Video pendiente</span>
         </div>
-        <noscript>
-          <a class="btn btn--primary btn--large btn--full" href="https://calendly.com/webmarlenyluna/30min" target="_blank" rel="noopener">
-            Agenda tu asesoría gratuita
-          </a>
-        </noscript>
       </div>
     </div>
   </section>
@@ -147,14 +144,24 @@
     </div>
   </section>
 
-  <!-- ============================= CTA FINAL ============================= -->
-  <section class="cta-final">
+  <!-- ============================= CTA FINAL — AGENDA AQUÍ ============================= -->
+  <section class="cta-final" id="cta-form">
     <div class="container cta-final__inner">
       <div class="cta-final__copy reveal">
         <h2>¿Lista para empezar tranquila?</h2>
         <p>Elige el horario que mejor te acomode y hablamos 30 minutos, sin costo, sobre tu boda.</p>
       </div>
-      <a class="btn btn--primary btn--large reveal" href="#cta-form">Agenda tu asesoría gratuita</a>
+
+      <div class="booking-widget reveal">
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/webmarlenyluna/30min">
+        </div>
+        <noscript>
+          <a class="btn btn--primary btn--large btn--full" href="https://calendly.com/webmarlenyluna/30min" target="_blank" rel="noopener">
+            Agenda tu asesoría gratuita
+          </a>
+        </noscript>
+      </div>
     </div>
   </section>
 
@@ -183,6 +190,6 @@
 <!-- Calendly: widget en vivo, no se puede auto-hospedar — excepción intencional a "sin CDN en runtime" -->
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
-<script defer src="main.js?v=20260825c"></script>
+<script defer src="main.js?v=20260825d"></script>
 </body>
 </html>
