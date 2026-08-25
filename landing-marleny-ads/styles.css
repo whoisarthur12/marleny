@@ -494,7 +494,7 @@ section { scroll-margin-top: var(--header-h); }
 
 @media (min-width: 960px) {
   :root { --header-h: 88px; }
-  .hero__booking .calendly-inline-widget { height: 680px; }
+  .hero__booking .calendly-inline-widget { height: 700px; }
   .testimonial { flex-direction: row; align-items: center; }
   .testimonial--reverse { flex-direction: row-reverse; }
   .testimonial .photo-placeholder--testimonial { flex: 0 0 42%; }
